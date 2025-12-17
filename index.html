@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>DICTIONARY</h1>
+        <form id="searchForm">
+            <input type="text" id="wordInput" placeholder="ENTER WORD..." required>
+            <button type="submit">Search</button>
+        </form>
+
+        <div id="error" class="hidden"></div>
+        <div id="results" class="hidden">
+            <h2 id="titleWord"></h2>
+            <p id="phonetic"></p>
+            <audio id="audio" controls class="hidden"></audio>
+            <div id="definations"></div>
+            <div id="synonyms"></div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

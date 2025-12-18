@@ -1,12 +1,12 @@
-var form = document.getElementById("searchForm");
-var wordInput = document.getElementById("wordInput");
-var resultsDiv = document.getElementById("results");
-var wordTitle = document.getElementById("wordTitle");
-var phonetic = document.getElementById("phonetic");
-var audioEl = document.getElementById("audio");
-var definitionsDiv = document.getElementById("definitions");
-var synonymsDiv = document.getElementById("synonyms");
-var errorDiv = document.getElementById("error");
+const form = document.getElementById("searchForm");
+const wordInput = document.getElementById("wordInput");
+const resultsDiv = document.getElementById("results");
+const wordTitle = document.getElementById("wordTitle");
+const phonetic = document.getElementById("phonetic");
+const audioEl = document.getElementById("audio");
+const definitionsDiv = document.getElementById("definitions");
+const synonymsDiv = document.getElementById("synonyms");
+const  errorDiv = document.getElementById("error");
 
 form.onsubmit = function(e) {
     e.preventDefault();

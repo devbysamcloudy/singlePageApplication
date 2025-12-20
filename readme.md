@@ -39,7 +39,6 @@ Fetch API: Used to retrieve word data from the online dictionary.
 
 ### File Structure
 wordly-spa/
-│
-├── index.html       --> The main page
-├── style.css        --> Styles for the page
-└── script.js        --> JavaScript logic for search and display
+index.html       --> The main page
+style.css        --> Styles for the page
+script.js        --> JavaScript logic for search and display

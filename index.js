@@ -13,81 +13,65 @@ form.addEventListener("submit", function (e) {
     var word = wordInput.value.trim();
 
     if (word === "") {
-        showError("Please enter a word");
+        alert("Please enter a word");
         return;
     }
 
-    fetchWord(word, displayWord, showError);
+    fetchWord(word);
 });
 
-function fetchWord(word, successCallback, errorCallback) {
-    clearUI();
+function fetchWord(word) {
+    resetUI();
 
     fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word)
         .then(function (response) {
-            if (!response.ok) {
-                throw "error";
-            }
+            if (!response.ok) throw new Error("Word not found");
             return response.json();
         })
         .then(function (data) {
-            successCallback(data[0]);
+            displayWord(data[0]);
         })
-        .catch(function () {
-            errorCallback("Word not found or error fetching data.");
+        .catch(function (err) {
+            showError(err.message);
         });
 }
 
 function displayWord(data) {
     wordTitle.innerHTML = data.word;
-    phonetic.innerHTML = data.phonetic ? data.phonetic : "";
+    phonetic.innerHTML = data.phonetic || "";
 
-    if (data.phonetics && data.phonetics.length > 0) {
-        if (data.phonetics[0].audio) {
-            audioEl.src = data.phonetics[0].audio;
-            audioEl.style.display = "block";
-        }
+    if (data.phonetics && data.phonetics[0]?.audio) {
+        audioEl.src = data.phonetics[0].audio;
+        audioEl.style.display = "block";
     }
 
-    data.meanings.forEach(function (meaning) {
-        addPartOfSpeech(meaning.partOfSpeech);
-        addDefinitions(meaning.definitions);
-        addSynonyms(meaning.synonyms);
-    });
+    definitionsDiv.innerHTML = "";
+    synonymsDiv.innerHTML = "";
+
+    for (var i = 0; i < data.meanings.length; i++) {
+        var m = data.meanings[i];
+
+        var h3 = document.createElement("h3");
+        h3.innerHTML = m.partOfSpeech;
+        definitionsDiv.appendChild(h3);
+
+        for (var j = 0; j < m.definitions.length; j++) {
+            var def = m.definitions[j];
+            var p = document.createElement("p");
+            p.innerHTML = "- " + def.definition + (def.example ? " (e.g. " + def.example + ")" : "");
+            definitionsDiv.appendChild(p);
+        }
+
+        if (m.synonyms && m.synonyms.length > 0) {
+            for (var k = 0; k < m.synonyms.length; k++) {
+                var span = document.createElement("span");
+                span.innerHTML = m.synonyms[k] + " ";
+                synonymsDiv.appendChild(span);
+            }
+        }
+    }
 
     resultsDiv.style.display = "block";
-}
-
-
-function addPartOfSpeech(text) {
-    var h3 = document.createElement("h3");
-    h3.innerHTML = text;
-    definitionsDiv.appendChild(h3);
-}
-
-function addDefinitions(definitions) {
-    definitions.forEach(function (def) {
-        var p = document.createElement("p");
-        p.innerHTML = "- " + def.definition;
-
-        if (def.example) {
-            p.innerHTML += " (e.g. " + def.example + ")";
-        }
-
-        definitionsDiv.appendChild(p);
-    });
-}
-
-function addSynonyms(synonyms) {
-    if (!synonyms || synonyms.length === 0) {
-        return;
-    }
-
-    synonyms.forEach(function (syn) {
-        var span = document.createElement("span");
-        span.innerHTML = syn + " ";
-        synonymsDiv.appendChild(span);
-    });
 }
 
 function showError(message) {
@@ -95,7 +79,7 @@ function showError(message) {
     errorDiv.style.display = "block";
 }
 
-function clearUI() {
+function resetUI() {
     resultsDiv.style.display = "none";
     errorDiv.style.display = "none";
     definitionsDiv.innerHTML = "";

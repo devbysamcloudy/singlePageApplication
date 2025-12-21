@@ -8,7 +8,6 @@ const definitionsDiv = document.getElementById("definitions");
 const synonymsDiv = document.getElementById("synonyms");
 const errorDiv = document.getElementById("error");
 
-/* event listener */
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     var word = wordInput.value.trim();
@@ -21,7 +20,6 @@ form.addEventListener("submit", function (e) {
     fetchWord(word, displayWord, showError);
 });
 
-/* function to fetch data (callback used) */
 function fetchWord(word, successCallback, errorCallback) {
     clearUI();
 
@@ -40,7 +38,6 @@ function fetchWord(word, successCallback, errorCallback) {
         });
 }
 
-/* function to display word data */
 function displayWord(data) {
     wordTitle.innerHTML = data.word;
     phonetic.innerHTML = data.phonetic ? data.phonetic : "";
@@ -61,7 +58,6 @@ function displayWord(data) {
     resultsDiv.style.display = "block";
 }
 
-/* helper functions */
 
 function addPartOfSpeech(text) {
     var h3 = document.createElement("h3");

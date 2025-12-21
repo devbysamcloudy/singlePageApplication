@@ -1,34 +1,97 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
     padding: 20px;
-    background-color: #f5f5f5;
+    color: #333;
 }
 
 h1 {
     text-align: center;
+    color: #4a90e2;
 }
 
 form {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-input {
+input[type="text"] {
+    width: 250px;
     padding: 8px;
-    width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 button {
-    padding: 8px 12px;
+    padding: 8px 15px;
+    font-size: 16px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+#error {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#results {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+#wordTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#phonetic {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #666;
 }
 
 #definitions p {
     margin: 5px 0;
+    line-height: 1.5;
+}
+
+#definitions h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #4a90e2;
+}
+
+#synonyms {
+    margin-top: 15px;
 }
 
 #synonyms span {
-    background-color: #e0e0ff;
-    margin: 3px;
-    padding: 3px 6px;
     display: inline-block;
+    background-color: #e0f0ff;
+    color: #004a99;
+    padding: 3px 8px;
     border-radius: 4px;
+    margin: 3px 3px 3px 0;
+    font-size: 14px;
+}
+
+audio {
+    margin-top: 10px;
+    width: 100%;
 }
